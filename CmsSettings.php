@@ -5,7 +5,7 @@
  * @package OneTwist CMS
  * @author twisted1919 (cristian.serban@onetwist.com)
  * @copyright OneTwist CMS (www.onetwist.com)
- * @version 1.2
+ * @version 1.2.1
  * @since 1.0
  * @access public
  *
@@ -411,6 +411,7 @@ class CmsSettings extends CApplicationComponent
     protected function addDbItem($category='system', $key, $value)
     {
         $connection=$this->getDbComponent();
+        if (!isset($connection->tablePrefix)) $connection->tablePrefix = '';
         $command=$connection->createCommand('SELECT id FROM '.$this->getTableName().' WHERE `category`=:cat AND `key`=:key LIMIT 1');
         $command->bindParam(':cat', $category);
         $command->bindParam(':key', $key);
